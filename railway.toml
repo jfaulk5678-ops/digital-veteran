@@ -1,8 +1,0 @@
-# railway.toml
-[deploy]
-build = { builder = "nixpacks" }
-
-[services]
-[[services]]
-name = "web"
-run = "python dashboard.py"
