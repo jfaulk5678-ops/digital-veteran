@@ -2,72 +2,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Digital Veteran Dashboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Digital Veteran</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .card { background: #f5f5f5; padding: 20px; border-radius: 8px; }
-        .leads { grid-column: 1 / -1; }
-        .lead-item { background: white; margin: 5px 0; padding: 10px; border-radius: 4px; }
-        .high-confidence { border-left: 4px solid #4CAF50; }
-        .medium-confidence { border-left: 4px solid #FFC107; }
-        .low-confidence { border-left: 4px solid #F44336; }
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .card { background: #f5f5f5; padding: 20px; margin: 10px 0; border-radius: 8px; }
+        .ai-section { background: #e3f2fd; padding: 15px; margin: 10px 0; }
     </style>
 </head>
 <body>
-    <h1>?? Digital Veteran Dashboard</h1>
+    <h1>?? Digital Veteran - AI Powered</h1>
     
-    <div class="dashboard">
-        <div class="card">
-            <h3>System Stats</h3>
-            <div id="stats">
-                <p>Feedback Entries: {{ stats.total_feedback_entries }}</p>
-                <p>Evolution Cycles: {{ stats.evolution_cycles }}</p>
-                <p>Patterns Learned: {{ stats.patterns_learned }}</p>
-            </div>
-        </div>
-        
-        <div class="card">
-            <h3>ICP Recommendations</h3>
-            <div id="icp">
-                <strong>Target:</strong> {{ icp_recs.target_signals|join(', ') }}<br>
-                <strong>Avoid:</strong> {{ icp_recs.avoid_signals|join(', ') }}<br>
-                <strong>Confidence:</strong> {{ (icp_recs.confidence_level * 100)|round(1) }}%
-            </div>
-        </div>
-        
-        <div class="card leads">
-            <h3>Generated Leads</h3>
-            <button onclick="loadLeads()">Generate New Leads</button>
-            <div id="leads-container"></div>
-        </div>
+    <div class="card">
+        <h3>System Stats</h3>
+        <p>Feedback Entries: {{ stats.total_feedback_entries }}</p>
+        <p>Evolution Cycles: {{ stats.evolution_cycles }}</p>
+    </div>
+    
+    <div class="card">
+        <h3>ICP Recommendations</h3>
+        <p>Confidence: {{ (icp_recs.confidence_level * 100)|round(1) }}%</p>
     </div>
 
-    <script>
-        async function loadLeads() {
-            const response = await fetch('/api/leads?count=5');
-            const leads = await response.json();
-            
-            const container = document.getElementById('leads-container');
-            container.innerHTML = leads.map(lead => 
-                `<div class="lead-item ${getConfidenceClass(lead.confidence_score)}">
-                    <strong>${lead.company_name}</strong> - ${lead.industry}<br>
-                    Size: ${lead.company_size} | Potential: $${lead.revenue_potential}<br>
-                    Confidence: ${(lead.confidence_score * 100).toFixed(1)}%
-                </div>`
-            ).join('');
-        }
-        
-        function getConfidenceClass(score) {
-            if (score > 0.7) return 'high-confidence';
-            if (score > 0.5) return 'medium-confidence';
-            return 'low-confidence';
-        }
-        
-        // Load initial data
-        loadLeads();
-    </script>
+    <div class="ai-section">
+        <h3>?? AI Features</h3>
+        <p><a href="/api/ai-leads?count=3">Get AI-Enhanced Leads</a></p>
+        <p>Ollama Integration: Active</p>
+    </div>
 </body>
 </html>
         
