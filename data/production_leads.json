@@ -1,0 +1,102 @@
+[
+  {
+    "name": "TechStart0",
+    "domain": "techstart0.com",
+    "industry": "SaaS",
+    "employee_count": "10-50",
+    "location": "San Francisco, CA",
+    "description": "Fast-growing technology company",
+    "source": "mock_api",
+    "contact_email": "contact@techstart0.com",
+    "social_signals": {
+      "linkedin_followers": 1807,
+      "recent_posts": 5,
+      "growth_signal": "active"
+    },
+    "confidence_score": 1.0,
+    "generated_at": "2026-02-21T15:51:48.077152",
+    "recommendation": "HIGH",
+    "batch_id": "batch_20260221_1551",
+    "system_version": "1.0.0"
+  },
+  {
+    "name": "TechStart1",
+    "domain": "techstart1.com",
+    "industry": "FinTech",
+    "employee_count": "50-100",
+    "location": "San Francisco, CA",
+    "description": "Fast-growing technology company",
+    "source": "mock_api",
+    "contact_email": "contact@techstart1.com",
+    "social_signals": {
+      "linkedin_followers": 2374,
+      "recent_posts": 5,
+      "growth_signal": "active"
+    },
+    "confidence_score": 1.0,
+    "generated_at": "2026-02-21T15:51:48.077152",
+    "recommendation": "HIGH",
+    "batch_id": "batch_20260221_1551",
+    "system_version": "1.0.0"
+  },
+  {
+    "name": "TechStart2",
+    "domain": "techstart2.com",
+    "industry": "Technology",
+    "employee_count": "10-50",
+    "location": "San Francisco, CA",
+    "description": "Fast-growing technology company",
+    "source": "mock_api",
+    "contact_email": "contact@techstart2.com",
+    "social_signals": {
+      "linkedin_followers": 1194,
+      "recent_posts": 5,
+      "growth_signal": "active"
+    },
+    "confidence_score": 0.8,
+    "generated_at": "2026-02-21T15:51:48.077152",
+    "recommendation": "HIGH",
+    "batch_id": "batch_20260221_1551",
+    "system_version": "1.0.0"
+  },
+  {
+    "name": "TechStart3",
+    "domain": "techstart3.com",
+    "industry": "SaaS",
+    "employee_count": "50-100",
+    "location": "San Francisco, CA",
+    "description": "Fast-growing technology company",
+    "source": "mock_api",
+    "contact_email": "contact@techstart3.com",
+    "social_signals": {
+      "linkedin_followers": 4812,
+      "recent_posts": 5,
+      "growth_signal": "active"
+    },
+    "confidence_score": 1.0,
+    "generated_at": "2026-02-21T15:51:48.077152",
+    "recommendation": "HIGH",
+    "batch_id": "batch_20260221_1551",
+    "system_version": "1.0.0"
+  },
+  {
+    "name": "TechStart4",
+    "domain": "techstart4.com",
+    "industry": "FinTech",
+    "employee_count": "10-50",
+    "location": "San Francisco, CA",
+    "description": "Fast-growing technology company",
+    "source": "mock_api",
+    "contact_email": "contact@techstart4.com",
+    "social_signals": {
+      "linkedin_followers": 2950,
+      "recent_posts": 5,
+      "growth_signal": "active"
+    },
+    "confidence_score": 1.0,
+    "generated_at": "2026-02-21T15:51:48.077152",
+    "recommendation": "HIGH",
+    "batch_id": "batch_20260221_1551",
+    "system_version": "1.0.0"
+  }
+]

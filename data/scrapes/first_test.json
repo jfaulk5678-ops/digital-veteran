@@ -1,0 +1,34 @@
+[
+  {
+    "url": "https://www.salesforce.com",
+    "timestamp": "2026-02-21T15:08:40.446397",
+    "content_length": 198,
+    "gaps_found": [],
+    "search_terms_matched": 0
+  },
+  {
+    "url": "https://www.hubspot.com",
+    "timestamp": "2026-02-21T15:08:46.972407",
+    "content_length": 7360,
+    "gaps_found": [
+      {
+        "term": "small business",
+        "context": "them.\nLearn more\nabout Breeze, HubSpot's AI tools\nSmall Business Bundle\nThe Starter edition of each product, at on",
+        "url": "https://www.hubspot.com"
+      },
+      {
+        "term": "startup",
+        "context": "p Partner Program\nApp Partner Program\nHubSpot for Startups\nHubSpot for Startups\nAffiliate Program\nAffiliate",
+        "url": "https://www.hubspot.com"
+      }
+    ],
+    "search_terms_matched": 2
+  },
+  {
+    "url": "https://www.zoho.com",
+    "timestamp": "2026-02-21T15:08:45.546916",
+    "content_length": 4156,
+    "gaps_found": [],
+    "search_terms_matched": 0
+  }
+]

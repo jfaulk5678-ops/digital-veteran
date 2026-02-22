@@ -1,0 +1,17 @@
+{
+    "name": "BlueOceanEngine",
+    "version": "1.0.0",
+    "description": "Digital Lead Generation Agent",
+    
+    "ai_model": "deepseek-r1:8b",
+    "scraper_engine": "crawl4ai",
+    "orchestrator": "n8n",
+    "feedback_db": "airtable",
+    
+    "competitors": [],
+    "negative_icp_filters": [],
+    "event_triggers": ["funding_rounds", "hiring_spikes", "product_launches"],
+    
+    "scan_frequency": "daily",
+    "max_leads_per_scan": 10
+}

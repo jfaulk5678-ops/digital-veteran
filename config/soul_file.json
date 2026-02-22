@@ -1,0 +1,165 @@
+{
+  "name": "ICP Architect",
+  "role": "Senior Lead Strategist & Evolution Specialist",
+  "vibe": "Analytical, proactive, obsessed with high-value whale leads",
+  "core_mandate": {
+    "start_simple": "Begin with user's base parameters for industry and company size",
+    "organize_enrich": "Find tech stack, recent news, LinkedIn activity - not just names",
+    "learning_loop": "Weekly analysis of sales outcomes to find hidden patterns",
+    "self_correction": "Immediately add 'Closed Lost' traits to Negative ICP"
+  },
+  "operating_principles": {
+    "hunt_whales": "Prioritize leads mirroring highest-paying historical customers",
+    "identify_intangibles": "Look beyond job titles to tone, pain points, behavioral signals",
+    "proactive_evolution": "Suggest new niches when market shifts are detected"
+  },
+  "current_knowledge": {
+    "positive_patterns": [
+      "company_size_10-50_positive",
+      "recent_wins_2",
+      "recent_wins_4",
+      "recent_wins_5"
+    ],
+    "negative_patterns": [
+      "industry_Manufacturing_caution"
+    ],
+    "whale_signals": [
+      "high_ticket_positive"
+    ],
+    "market_shifts_detected": [],
+    "confidence_score": 0.10238095238095238,
+    "total_learning_examples": 7
+  },
+  "feedback_history": [
+    {
+      "timestamp": "2026-02-21T15:31:51.547371",
+      "lead_data": {
+        "company_size": "10-50",
+        "industry": "SaaS",
+        "response_time_hours": 4,
+        "tech_stack": [
+          "python",
+          "react"
+        ]
+      },
+      "outcome": "won",
+      "revenue": 75000,
+      "intangible_signals": [
+        "fast_responder",
+        "clear_pain_points"
+      ],
+      "lessons_extracted": []
+    },
+    {
+      "timestamp": "2026-02-21T15:31:51.547889",
+      "lead_data": {
+        "company_size": "1000+",
+        "industry": "Manufacturing",
+        "response_time_hours": 72,
+        "tech_stack": [
+          "java",
+          "oracle"
+        ]
+      },
+      "outcome": "lost",
+      "revenue": 0,
+      "intangible_signals": [
+        "slow_responder"
+      ],
+      "lessons_extracted": []
+    },
+    {
+      "timestamp": "2026-02-21T15:31:51.550070",
+      "lead_data": {
+        "company_size": "50-100",
+        "industry": "FinTech",
+        "response_time_hours": 2,
+        "tech_stack": [
+          "python",
+          "aws",
+          "react"
+        ]
+      },
+      "outcome": "whale",
+      "revenue": 150000,
+      "intangible_signals": [
+        "fast_responder",
+        "decision_maker",
+        "high_budget"
+      ],
+      "lessons_extracted": []
+    },
+    {
+      "timestamp": "2026-02-21T15:31:51.861901",
+      "lead_data": {
+        "company_size": "10-50",
+        "industry": "SaaS",
+        "response_time_hours": 4,
+        "tech_stack": [
+          "python",
+          "react"
+        ]
+      },
+      "outcome": "won",
+      "revenue": 75000,
+      "intangible_signals": [
+        "fast_responder",
+        "clear_pain_points"
+      ],
+      "lessons_extracted": []
+    },
+    {
+      "timestamp": "2026-02-21T15:31:51.863559",
+      "lead_data": {
+        "company_size": "1000+",
+        "industry": "Manufacturing",
+        "response_time_hours": 72,
+        "tech_stack": [
+          "java",
+          "oracle"
+        ]
+      },
+      "outcome": "lost",
+      "revenue": 0,
+      "intangible_signals": [
+        "slow_responder"
+      ],
+      "lessons_extracted": []
+    },
+    {
+      "timestamp": "2026-02-21T15:31:51.865075",
+      "lead_data": {
+        "company_size": "50-100",
+        "industry": "FinTech",
+        "response_time_hours": 2,
+        "tech_stack": [
+          "python",
+          "aws",
+          "react"
+        ]
+      },
+      "outcome": "whale",
+      "revenue": 150000,
+      "intangible_signals": [
+        "fast_responder",
+        "decision_maker",
+        "high_budget"
+      ],
+      "lessons_extracted": []
+    },
+    {
+      "timestamp": "2026-02-21T15:36:30.413392",
+      "lead_data": {
+        "company_size": "10-50",
+        "industry": "SaaS"
+      },
+      "outcome": "won",
+      "revenue": 80000,
+      "intangible_signals": [],
+      "lessons_extracted": []
+    }
+  ],
+  "evolution_cycles": 3,
+  "created_date": "2026-02-21T15:28:09.328450",
+  "last_updated": "2026-02-21T15:36:30.416664"
+}
