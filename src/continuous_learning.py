@@ -56,8 +56,25 @@ class ContinuousLearningEngine:
         ]
 
         # Also look for behavioral whales (not just revenue)
-        if whale_lead.get("strategic_fit_score") > 0.8:
+        if whale_lead.get("strategic_fit_score", 0) > 0.8:
             whale_signals.append("high_strategic_alignment")
+
+    def _calculate_learning_impact(self, feedback: dict) -> dict:
+        """Calculate the learning impact of a single outcome"""
+        impact = {
+            "feedback_id": len(self.feedback_history),
+            "outcome": feedback["outcome"],
+            "revenue_impact": feedback.get("revenue", 0),
+            "learning_weight": 1.0,
+        }
+        
+        # High-value outcomes get higher weight
+        if feedback.get("revenue", 0) > 100000:
+            impact["learning_weight"] = 2.0  # Whale deals worth 2x learning
+        elif feedback.get("revenue", 0) > 50000:
+            impact["learning_weight"] = 1.5
+        
+        return impact
 
 
 class WeeklyReflectionEngine:
