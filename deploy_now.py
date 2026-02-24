@@ -1,5 +1,5 @@
 print("?? GITHUB PUSH COMPLETE!")
-print("="*40)
+print("=" * 40)
 print("?? Push Statistics:")
 print("   - Files: 24,595")
 print("   - Size: 178 MB")
@@ -21,4 +21,5 @@ print("   Then: git add .gitignore && git commit -m 'Cleanup'")
 
 # Open Railway
 import webbrowser
-webbrowser.open('https://railway.app')
+
+webbrowser.open("https://railway.app")

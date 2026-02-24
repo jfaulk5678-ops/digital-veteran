@@ -1,5 +1,5 @@
 print("?? DEPLOY TO RAILWAY - FIXED CONFIG")
-print("="*45)
+print("=" * 45)
 
 print("? Railway configuration fixed!")
 print("?? Deployment steps:")
@@ -26,4 +26,5 @@ print("   - Test locally: python dashboard.py")
 print("   - Visit your repo: https://github.com/jfaulk5678-ops/digital-veteran")
 
 import webbrowser
-webbrowser.open('https://railway.app/new')
+
+webbrowser.open("https://railway.app/new")

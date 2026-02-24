@@ -1,78 +1,116 @@
-import sys
+import logging
 import os
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+import secrets
+from functools import wraps
 
-from datetime import datetime, timedelta
-from src.soul_file_engine import SoulFileEngine
+from flask import Flask, jsonify, redirect, request, session
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import Flow
+from googleapiclient.discovery import build
 
-class CRMDataBridge:
-    def __init__(self, soul_engine: SoulFileEngine):
-        self.soul_engine = soul_engine
-        
-    def simulate_crm_data(self):
-        """Create realistic sample CRM data"""
-        sample_data = [
-            {
-                "company": "TechStart Inc",
-                "company_size": "10-50", 
-                "industry": "SaaS",
-                "outcome": "won",
-                "revenue": 75000,
-                "response_time_hours": 2,
-                "deal_size": "medium",
-                "close_date": (datetime.now() - timedelta(days=5)).strftime('%Y-%m-%d')
-            },
-            {
-                "company": "BigCorp Ltd",
-                "company_size": "1000+",
-                "industry": "Manufacturing", 
-                "outcome": "lost",
-                "revenue": 0,
-                "response_time_hours": 72,
-                "deal_size": "large",
-                "close_date": (datetime.now() - timedelta(days=10)).strftime('%Y-%m-%d')
-            }
-        ]
-        return sample_data
-    
-    def import_recent_outcomes(self, days_back: int = 30):
-        """Import recent outcomes"""
-        print(f"?? Importing outcomes from last {days_back} days...")
-        outcomes = self.simulate_crm_data()
-        print(f"?? Found {len(outcomes)} outcomes")
-        return outcomes
-    
-    def process_outcomes_to_soul(self, outcomes):
-        """Process outcomes into soul file"""
-        processed_count = 0
-        for outcome in outcomes:
-            soul_feedback = self._transform_crm_to_soul(outcome)
-            self.soul_engine.add_feedback(soul_feedback)
-            processed_count += 1
-        print(f"? Processed {processed_count} outcomes")
-        return processed_count
-    
-    def _transform_crm_to_soul(self, crm_outcome):
-        """Transform CRM data to soul format"""
-        return {
-            "lead_data": {
-                "company_size": crm_outcome.get('company_size', ''),
-                "industry": crm_outcome.get('industry', ''),
-                "response_time_hours": crm_outcome.get('response_time_hours', 48),
-                "company_name": crm_outcome.get('company', '')
-            },
-            "outcome": crm_outcome.get('outcome', 'unknown'),
-            "revenue": crm_outcome.get('revenue', 0),
-            "intangible_signals": []
-        }
+# Configuration
+app = Flask(__name__)
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", secrets.token_hex(32))
+
+# Environment variables
+CLIENT_SECRETS_FILE = os.environ.get("CLIENT_SECRETS_FILE", "client_secret.json")
+SCOPES = ["https://www.googleapis.com/auth/gmail.readonly"]
+REDIRECT_URI = os.environ.get("REDIRECT_URI", "https://yourdomain.com/oauth2callback")
+
+# Logging configuration
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+
+def credentials_to_dict(credentials):
+    return {
+        "token": credentials.token,
+        "refresh_token": credentials.refresh_token,
+        "token_uri": credentials.token_uri,
+        "client_id": credentials.client_id,
+        "client_secret": credentials.client_secret,
+        "scopes": credentials.scopes,
+    }
+
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if "credentials" not in session:
+            return redirect("/authorize")
+        return f(*args, **kwargs)
+
+    return decorated_function
+
+
+@app.route("/")
+def index():
+    return "Google API Integration"
+
+
+@app.route("/authorize")
+def authorize():
+    try:
+        flow = Flow.from_client_secrets_file(
+            CLIENT_SECRETS_FILE, scopes=SCOPES, redirect_uri=REDIRECT_URI
+        )
+        authorization_url, state = flow.authorization_url(
+            access_type="offline", include_granted_scopes="true", prompt="consent"
+        )
+        session["state"] = state
+        return redirect(authorization_url)
+    except Exception as e:
+        logger.error(f"Authorization error: {str(e)}")
+        return jsonify(error="Authorization failed"), 500
+
+
+@app.route("/oauth2callback")
+def oauth2callback():
+    try:
+        state = session["state"]
+        flow = Flow.from_client_secrets_file(
+            CLIENT_SECRETS_FILE, scopes=SCOPES, state=state, redirect_uri=REDIRECT_URI
+        )
+        flow.fetch_token(authorization_response=request.url)
+        credentials = flow.credentials
+        session["credentials"] = credentials_to_dict(credentials)
+        return redirect("/protected")
+    except Exception as e:
+        logger.error(f"OAuth callback error: {str(e)}")
+        return jsonify(error="Authentication failed"), 401
+
+
+@app.route("/protected")
+@login_required
+def protected():
+    try:
+        credentials = Credentials(**session["credentials"])
+        service = build("gmail", "v1", credentials=credentials)
+        results = service.users().messages().list(userId="me").execute()
+        return jsonify(messages=results.get("messages", []))
+    except Exception as e:
+        logger.error(f"API call failed: {str(e)}")
+        return jsonify(error="Service unavailable"), 503
+
+
+@app.route("/revoke")
+def revoke():
+    try:
+        credentials = Credentials(**session["credentials"])
+        credentials.revoke(Request())
+        session.clear()
+        return jsonify(message="Credentials revoked")
+    except Exception as e:
+        logger.error(f"Revocation error: {str(e)}")
+        return jsonify(error="Revocation failed"), 500
+
+
+@app.route("/clear")
+def clear_credentials():
+    session.clear()
+    return jsonify(message="Session cleared")
+
 
 if __name__ == "__main__":
-    print("Testing CRM Data Bridge...")
-    soul_engine = SoulFileEngine()
-    bridge = CRMDataBridge(soul_engine)
-    
-    outcomes = bridge.import_recent_outcomes(30)
-    bridge.process_outcomes_to_soul(outcomes)
-    
-    recs = soul_engine.get_current_icp_recommendations()
-    print("Final ICP:", recs)
+    app.run(ssl_context="adhoc", host="0.0.0.0", port=5000)

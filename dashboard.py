@@ -1,79 +1,82 @@
-from flask import Flask, render_template, jsonify, request
-from soul_file_engine import SoulFileEngine
-from lead_sourcing_agent import LeadSourcingAgent
 import json
 import os
 
+from flask import Flask, jsonify, render_template, request
+
+from lead_sourcing_agent import LeadSourcingAgent
+from soul_file_engine import SoulFileEngine
+
+
 def create_app():
     app = Flask(__name__)
-    
+
     # Configuration
-    app.config['ENV'] = os.getenv('FLASK_ENV', 'production')
-    
+    app.config["ENV"] = os.getenv("FLASK_ENV", "production")
+
     # Create templates directory
-    os.makedirs('templates', exist_ok=True)
-    
+    os.makedirs("templates", exist_ok=True)
+
     # Global instances
     soul_engine = SoulFileEngine()
     sourcing_agent = LeadSourcingAgent(soul_engine)
 
-    @app.route('/')
+    @app.route("/")
     def dashboard():
         """Main dashboard page"""
         stats = soul_engine.get_soul_stats()
         icp_recs = soul_engine.get_current_icp_recommendations()
-        
-        return render_template('dashboard.html', 
-                            stats=stats, 
-                            icp_recs=icp_recs)
 
-    @app.route('/api/stats')
+        return render_template("dashboard.html", stats=stats, icp_recs=icp_recs)
+
+    @app.route("/api/stats")
     def api_stats():
         return jsonify(soul_engine.get_soul_stats())
 
-    @app.route('/api/icp')
+    @app.route("/api/icp")
     def api_icp():
         return jsonify(soul_engine.get_current_icp_recommendations())
 
-    @app.route('/api/leads')
+    @app.route("/api/leads")
     def api_leads():
-        count = request.args.get('count', 5, type=int)
+        count = request.args.get("count", 5, type=int)
         leads = sourcing_agent.generate_leads_based_on_icp(count)
         scored_leads = sourcing_agent.score_leads(leads)
         return jsonify(scored_leads)
 
     # NEW AI ROUTES
-    @app.route('/api/ai-analyze', methods=['POST'])
+    @app.route("/api/ai-analyze", methods=["POST"])
     def api_ai_analyze():
         """Analyze a lead with AI"""
         try:
             from ai_integration import AIIntegration
+
             ai = AIIntegration()
-            
+
             lead_data = request.get_json()
             analysis = ai.analyze_lead_with_ai(lead_data)
-            
+
             return jsonify({"status": "success", "analysis": analysis})
         except Exception as e:
             return jsonify({"status": "error", "message": str(e)})
 
-    @app.route('/api/ai-leads')
+    @app.route("/api/ai-leads")
     def api_ai_leads():
         """Get AI-enhanced leads"""
         try:
             from ai_lead_agent import AIPoweredLeadSourcingAgent
+
             ai_agent = AIPoweredLeadSourcingAgent(soul_engine)
-            
-            count = request.args.get('count', 5, type=int)
+
+            count = request.args.get("count", 5, type=int)
             leads = ai_agent.generate_intelligent_leads(count)
-            
+
             return jsonify(leads)
         except Exception as e:
             return jsonify({"status": "error", "message": str(e)})
 
     # Create simple template
-    with open('templates/dashboard.html', 'w') as f:
-        f.write('''
+    with open("templates/dashboard.html", "w") as f:
+        f.write("""
 <!DOCTYPE html>
 <html>
 <head>
@@ -105,9 +108,10 @@ def create_app():
     </div>
 </body>
 </html>
-        ''')
-    
+        """)
+
     return app
+
 
 # Create app instance
 app = create_app()
