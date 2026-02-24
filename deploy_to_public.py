@@ -21,7 +21,7 @@ import requests
 try:
     response = requests.get("http://localhost:5000/api/stats", timeout=2)
     print("? Local app is running correctly")
-except:
+except (requests.RequestException, ConnectionError):
     print("??  Local app not running - start with: python dashboard.py")
 
 import webbrowser

@@ -30,7 +30,9 @@
       "recent_wins_18",
       "recent_wins_20",
       "recent_wins_21",
-      "recent_wins_23"
+      "recent_wins_23",
+      "recent_wins_24",
+      "recent_wins_26"
     ],
     "negative_patterns": [
       "industry_Manufacturing_caution"
@@ -39,8 +41,8 @@
       "high_ticket_positive"
     ],
     "market_shifts_detected": [],
-    "confidence_score": 0.4839199448159094,
-    "total_learning_examples": 37
+    "confidence_score": 0.5456415565375211,
+    "total_learning_examples": 42
   },
   "feedback_history": [
     {
@@ -691,9 +693,96 @@
         "high_budget"
       ],
       "lessons_extracted": []
+    },
+    {
+      "timestamp": "2026-02-23T19:53:18.988722",
+      "lead_data": {
+        "company_size": "10-50",
+        "industry": "Tech",
+        "response_time_hours": 4
+      },
+      "outcome": "won",
+      "revenue": 50000,
+      "intangible_signals": [
+        "fast_responder",
+        "clear_pain_points"
+      ],
+      "lessons_extracted": []
+    },
+    {
+      "timestamp": "2026-02-23T19:53:18.990328",
+      "lead_data": {
+        "company_size": "1000+",
+        "industry": "Manufacturing",
+        "response_time_hours": 72
+      },
+      "outcome": "lost",
+      "revenue": 0,
+      "intangible_signals": [
+        "slow_responder"
+      ],
+      "lessons_extracted": []
+    },
+    {
+      "timestamp": "2026-02-23T19:53:19.010075",
+      "lead_data": {
+        "company_size": "10-50",
+        "industry": "SaaS",
+        "response_time_hours": 4,
+        "tech_stack": [
+          "python",
+          "react"
+        ]
+      },
+      "outcome": "won",
+      "revenue": 75000,
+      "intangible_signals": [
+        "fast_responder",
+        "clear_pain_points"
+      ],
+      "lessons_extracted": []
+    },
+    {
+      "timestamp": "2026-02-23T19:53:19.013444",
+      "lead_data": {
+        "company_size": "1000+",
+        "industry": "Manufacturing",
+        "response_time_hours": 72,
+        "tech_stack": [
+          "java",
+          "oracle"
+        ]
+      },
+      "outcome": "lost",
+      "revenue": 0,
+      "intangible_signals": [
+        "slow_responder"
+      ],
+      "lessons_extracted": []
+    },
+    {
+      "timestamp": "2026-02-23T19:53:19.015767",
+      "lead_data": {
+        "company_size": "50-100",
+        "industry": "FinTech",
+        "response_time_hours": 2,
+        "tech_stack": [
+          "python",
+          "aws",
+          "react"
+        ]
+      },
+      "outcome": "whale",
+      "revenue": 150000,
+      "intangible_signals": [
+        "fast_responder",
+        "decision_maker",
+        "high_budget"
+      ],
+      "lessons_extracted": []
     }
   ],
-  "evolution_cycles": 15,
+  "evolution_cycles": 17,
   "created_date": "2026-02-21T15:28:09.328450",
-  "last_updated": "2026-02-23T19:46:47.989697"
+  "last_updated": "2026-02-23T19:53:19.018289"
 }

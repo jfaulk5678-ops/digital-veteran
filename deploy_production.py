@@ -1,7 +1,6 @@
 # deploy_production.py
 import os
 import subprocess
-import sys
 
 
 def deploy_production():

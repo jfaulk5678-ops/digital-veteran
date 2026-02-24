@@ -3,10 +3,7 @@ import sys
 
 sys.path.append(os.path.dirname(__file__))
 
-import json
 from datetime import datetime
-
-import requests
 
 from src.soul_file_engine import SoulFileEngine
 

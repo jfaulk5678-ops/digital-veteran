@@ -1,8 +1,6 @@
 import os
 from datetime import datetime
 
-import requests
-
 from soul_file_engine import SoulFileEngine
 
 

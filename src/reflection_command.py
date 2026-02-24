@@ -1,3 +1,6 @@
+import json
+
+
 class ReflectionCommand:
     def __init__(self, soul_file_path: str):
         self.soul_file_path = soul_file_path

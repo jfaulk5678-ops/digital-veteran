@@ -3,8 +3,6 @@ import sys
 
 sys.path.append(os.path.dirname(__file__))
 
-import json
-
 from src.soul_file_engine import SoulFileEngine
 
 

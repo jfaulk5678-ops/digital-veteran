@@ -51,7 +51,7 @@ class AIIntegration:
                     response_text.find("{") : response_text.rfind("}") + 1
                 ]
                 return json.loads(json_str)
-        except:
+        except (json.JSONDecodeError, ValueError):
             pass
 
         return {"score": 7, "reasoning": "AI analysis completed", "confidence": 0.8}

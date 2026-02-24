@@ -1,8 +1,6 @@
 import json
 from datetime import datetime
-from typing import Any, Dict, List
-
-import pandas as pd
+from typing import Dict, List
 
 
 class ICPLearningEngine:

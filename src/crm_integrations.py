@@ -1,3 +1,6 @@
+from typing import List
+
+
 class HubSpotIntegration:
     """Template for HubSpot CRM integration"""
 

@@ -1,5 +1,4 @@
 # deploy_railway.py
-import os
 import subprocess
 import webbrowser
 
@@ -11,7 +10,7 @@ def deploy_railway():
     # Check if Railway CLI is installed
     try:
         subprocess.run(["railway", "--version"], capture_output=True, check=True)
-    except:
+    except (subprocess.CalledProcessError, FileNotFoundError):
         print("? Railway CLI not installed.")
         print("?? Install with: npm install -g @railway/cli")
         print("?? Or deploy via GitHub: https://railway.app")

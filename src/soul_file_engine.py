@@ -1,6 +1,5 @@
 import json
 import os
-import statistics
 from datetime import datetime, timedelta
 
 
@@ -187,7 +186,7 @@ class SoulFileEngine:
                 fb_date = datetime.fromisoformat(fb["timestamp"].replace("Z", "+00:00"))
                 if fb_date > cutoff_date:
                     recent.append(fb)
-            except:
+            except (ValueError, TypeError):
                 continue
 
         return recent
