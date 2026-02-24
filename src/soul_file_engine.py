@@ -7,6 +7,9 @@ class SoulFileEngine:
     def __init__(self, soul_file_path: str = "config/soul_file.json"):
         self.soul_file_path = soul_file_path
         self.soul = self._load_or_create_soul()
+        # In-memory cache for performance optimization
+        self._feedback_cache = {}
+        self._cache_timestamp = None
 
     def _load_or_create_soul(self):
         """Load existing soul file or create initial version with all required keys"""
@@ -113,6 +116,9 @@ class SoulFileEngine:
         soul_data["last_updated"] = datetime.now().isoformat()
         with open(self.soul_file_path, "w") as f:
             json.dump(soul_data, f, indent=2)
+        # Invalidate cache on save
+        self._feedback_cache = {}
+        self._cache_timestamp = None
 
     def add_feedback(self, outcome_data):
         """Add a single outcome to learn from"""
@@ -177,7 +183,12 @@ class SoulFileEngine:
         return analysis
 
     def _get_recent_feedback(self, days):
-        """Get feedback from the last N days"""
+        """Get feedback from the last N days (with caching)"""
+        # Check cache first
+        cache_key = f"recent_feedback_{days}"
+        if cache_key in self._feedback_cache:
+            return self._feedback_cache[cache_key]
+        
         cutoff_date = datetime.now() - timedelta(days=days)
         recent = []
 
@@ -189,6 +200,8 @@ class SoulFileEngine:
             except (ValueError, TypeError):
                 continue
 
+        # Store in cache
+        self._feedback_cache[cache_key] = recent
         return recent
 
     def _analyze_patterns(self, feedback):
