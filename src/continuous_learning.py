@@ -67,13 +67,13 @@ class ContinuousLearningEngine:
             "revenue_impact": feedback.get("revenue", 0),
             "learning_weight": 1.0,
         }
-        
+
         # High-value outcomes get higher weight
         if feedback.get("revenue", 0) > 100000:
             impact["learning_weight"] = 2.0  # Whale deals worth 2x learning
         elif feedback.get("revenue", 0) > 50000:
             impact["learning_weight"] = 1.5
-        
+
         return impact
 
 

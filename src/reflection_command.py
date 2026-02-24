@@ -38,7 +38,9 @@ class ReflectionCommand:
 
         # Analyze response patterns
         winner_response_times = [w.get("response_time_hours", 48) for w in winners]
-        loser_response_times = [l.get("response_time_hours", 48) for l in losers]
+        loser_response_times = [
+            loser.get("response_time_hours", 48) for loser in losers
+        ]
 
         # Analyze conversation tone patterns
         winner_tone_keywords = self._extract_tone_patterns(winners)

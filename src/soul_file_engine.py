@@ -188,7 +188,7 @@ class SoulFileEngine:
         cache_key = f"recent_feedback_{days}"
         if cache_key in self._feedback_cache:
             return self._feedback_cache[cache_key]
-        
+
         cutoff_date = datetime.now() - timedelta(days=days)
         recent = []
 
@@ -207,7 +207,6 @@ class SoulFileEngine:
     def _analyze_patterns(self, feedback):
         """Analyze patterns across multiple outcomes"""
         wins = [f for f in feedback if f["outcome"] in ["won", "whale"]]
-        losses = [f for f in feedback if f["outcome"] in ["lost", "churned"]]
 
         analysis = {
             "win_rate": len(wins) / len(feedback) if feedback else 0,

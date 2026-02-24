@@ -112,7 +112,9 @@ class LeadSourcingAgent:
         # Sort by confidence score
         scored_leads.sort(key=lambda x: x["icp_match_score"], reverse=True)
 
-        high_confidence = [l for l in scored_leads if l["recommendation"] == "Pursue"]
+        high_confidence = [
+            lead for lead in scored_leads if lead["recommendation"] == "Pursue"
+        ]
         print(f"?? High-confidence leads: {len(high_confidence)}/{len(scored_leads)}")
 
         return scored_leads
