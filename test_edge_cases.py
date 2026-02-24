@@ -123,25 +123,26 @@ class TestContinuousLearningEdgeCases:
     def test_zero_revenue(self):
         """Test handling of zero revenue outcomes."""
         engine = ContinuousLearningEngine()
-        feedback = engine.add_sales_outcome({"company": "Test"}, "lost", 0)
-        assert feedback["revenue"] == 0
-        assert feedback["outcome"] == "lost"
+        impact = engine.add_sales_outcome({"company": "Test"}, "lost", 0)
+        assert impact["revenue_impact"] == 0
+        assert impact["outcome"] == "lost"
 
     def test_very_high_revenue(self):
         """Test handling of very high revenue (whale deals)."""
         engine = ContinuousLearningEngine()
         revenue = 10_000_000  # $10M deal
-        feedback = engine.add_sales_outcome(
+        impact = engine.add_sales_outcome(
             {"company": "Enterprise", "strategic_fit_score": 0.9}, "won", revenue
         )
-        assert feedback["revenue"] == revenue
+        assert impact["revenue_impact"] == revenue
+        assert impact["learning_weight"] == 2.0  # Whale deals get 2x weight
 
     def test_missing_lead_data_fields(self):
         """Test with minimal lead data."""
         engine = ContinuousLearningEngine()
-        feedback = engine.add_sales_outcome({}, "won", 50000)
-        assert feedback["lead_data"] == {}
-        assert feedback["outcome"] == "won"
+        impact = engine.add_sales_outcome({}, "won", 75000)
+        assert impact["outcome"] == "won"
+        assert impact["learning_weight"] == 1.5  # >50k gets 1.5x weight
 
     def test_invalid_outcome_type(self):
         """Test with invalid outcome strings."""
